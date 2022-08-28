@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     TankController _tankController;
 
+    
+
     private void Awake()
     {
         _tankController = GetComponent<TankController>();
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
 
     public void IncreaseHealth(int amount)
     {
+        _currentHealth += amount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
         Debug.Log("Player's health: " + _currentHealth);
     }
@@ -41,4 +44,6 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
 
     }
+
+    
 }
