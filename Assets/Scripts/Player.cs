@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(TankController))]
 public class Player : MonoBehaviour
@@ -10,7 +11,8 @@ public class Player : MonoBehaviour
 
     TankController _tankController;
 
-    
+    public GameObject scoreText;
+    private int theScore;
 
     private void Awake()
     {
@@ -45,5 +47,10 @@ public class Player : MonoBehaviour
 
     }
 
-    
+    public void Score()
+    {
+        theScore += 1;
+        scoreText.GetComponent<Text>().text = "Treasure: " + theScore;
+    }
+
 }
