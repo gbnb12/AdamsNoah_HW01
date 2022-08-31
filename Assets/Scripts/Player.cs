@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 [RequireComponent(typeof(TankController))]
 public class Player : MonoBehaviour
 {
@@ -11,13 +12,16 @@ public class Player : MonoBehaviour
 
     TankController _tankController;
 
-    public GameObject scoreText;
-    private int theScore;
+    public int theScore;
+    [SerializeField] Text _scoreText;
+    [SerializeField] Text _healthText;
 
     private void Awake()
     {
         _tankController = GetComponent<TankController>();
     }
+
+
 
     private void Start()
     {
@@ -29,13 +33,15 @@ public class Player : MonoBehaviour
         _currentHealth += amount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
         Debug.Log("Player's health: " + _currentHealth);
+        _healthText.GetComponent<Text>().text = "Health: " + _currentHealth;
     }
 
     public void DecreaseHealth(int amount)
     {
         _currentHealth -= amount;
         Debug.Log("Player's health: " + _currentHealth);
-        if(_currentHealth <= 0)
+        _healthText.GetComponent<Text>().text = "Health: " + _currentHealth;
+        if (_currentHealth <= 0)
         {
             Kill();
         }
@@ -50,7 +56,9 @@ public class Player : MonoBehaviour
     public void Score()
     {
         theScore += 1;
-        scoreText.GetComponent<Text>().text = "Treasure: " + theScore;
+        _scoreText.GetComponent<Text>().text = "Treasure: " + theScore;
+
     }
 
+    
 }

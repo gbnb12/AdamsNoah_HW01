@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int _damageAmount = 1;
+    public int _damageAmount = 1;
     [SerializeField] ParticleSystem _impactParticles;
     [SerializeField] AudioClip _impactSound;
 
@@ -52,5 +52,10 @@ public class Enemy : MonoBehaviour
     public void Move()
     {
 
+    }
+
+    public void Safe()
+    {
+        _damageAmount = 0;
     }
 }

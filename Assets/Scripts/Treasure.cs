@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class Treasure : CollectibleBase
 {
- 
-protected override void Collect(Player player)
+
+    
+
+    
+
+    protected override void Collect(Player player)
     {
 
         player.Score();
 
     }
 
+    
 }

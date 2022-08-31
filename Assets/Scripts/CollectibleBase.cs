@@ -14,6 +14,8 @@ public abstract class CollectibleBase : MonoBehaviour
     [SerializeField] ParticleSystem _collectParticles;
     [SerializeField] AudioClip _collectSound;
 
+    public int theScore;
+
     Rigidbody _rb;
 
     private void Awake()
