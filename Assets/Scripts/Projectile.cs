@@ -6,9 +6,9 @@ namespace Inheritance
 {
     [RequireComponent(typeof(Rigidbody))]
 
-    public class Projectile : MonoBehaviour
+    public abstract class Projectile : MonoBehaviour
     {
-        
+        protected abstract void Impact(Collision otherCollision);
 
         [Header("Settings")]
         [SerializeField] protected float Speed = .25f;
@@ -20,7 +20,8 @@ namespace Inheritance
 
         private void OnCollisionEnter(Collision collision)
         {
-            
+            Impact(collision);
+            Feedback();
         }
 
         private void Awake()
@@ -40,6 +41,14 @@ namespace Inheritance
         {
             Vector3 moveOffset = transform.forward * Speed;
             RB.MovePosition(RB.position + moveOffset);
+        }
+
+        private void Feedback()
+        {
+            if (_impactSound != null)
+            {
+                AudioHelper.PlayClip2D(_impactSound, 1f);
+            }
         }
 
     }
