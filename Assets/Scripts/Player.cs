@@ -7,8 +7,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(TankController))]
 public class Player : MonoBehaviour
 {
+    public GameObject projectile;
+    public Transform firePosition;
+    //public GameObject projectileInstance;
     [SerializeField] int _maxHealth = 3;
-    int _currentHealth;
+     int _currentHealth;
 
     TankController _tankController;
 
@@ -21,11 +24,17 @@ public class Player : MonoBehaviour
         _tankController = GetComponent<TankController>();
     }
 
-
-
     private void Start()
     {
         _currentHealth = _maxHealth;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            Instantiate(projectile, firePosition.position, firePosition.rotation);
+        }
     }
 
     public void IncreaseHealth(int amount)
@@ -52,6 +61,8 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
 
     }
+
+
 
     public void Score()
     {

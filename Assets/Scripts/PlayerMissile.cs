@@ -9,8 +9,11 @@ namespace indexer
     {
         protected override void Impact(Collision otherCollision)
         {
-            otherCollision.rigidbody.gameObject.SetActive(false);
-            gameObject.SetActive(false);
+           
+                otherCollision.rigidbody.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            
+            
         }
     }
 }

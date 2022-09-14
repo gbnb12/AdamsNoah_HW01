@@ -22,6 +22,7 @@ namespace Inheritance
         {
             Impact(collision);
             Feedback();
+           
         }
 
         private void Awake()
@@ -48,6 +49,7 @@ namespace Inheritance
             if (_impactSound != null)
             {
                 AudioHelper.PlayClip2D(_impactSound, 1f);
+                
             }
         }
 
