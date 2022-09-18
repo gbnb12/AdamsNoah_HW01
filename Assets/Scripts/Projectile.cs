@@ -10,7 +10,7 @@ namespace Inheritance
     {
         protected abstract void Impact(Collision otherCollision);
 
-        [SerializeField] Collider _bossCollider;
+       
         
 
         [Header("Settings")]
@@ -24,15 +24,9 @@ namespace Inheritance
         
         private void OnCollisionEnter(Collision collision)
         {
+
             Impact(collision);
             Feedback();
-
-            IDamageable damage = _bossCollider.GetComponent<IDamageable>();
-            if(damage != null)
-            {
-                damage.TakeDamage(1);
-                Debug.Log("Object took damage: ");
-            }
            
         }
 
@@ -57,16 +51,17 @@ namespace Inheritance
 
         private void Feedback()
         {
-            if (_impactSound != null)
-            {
-                AudioHelper.PlayClip2D(_impactSound, 1f);
-                
-            }
             if (_impactParticle != null)
             {
                 _impactParticle = Instantiate(_impactParticle,
                     transform.position, Quaternion.identity);
             }
+            if (_impactSound != null)
+            {
+                AudioHelper.PlayClip2D(_impactSound, 1f);
+                
+            }
+            
         }
 
     }

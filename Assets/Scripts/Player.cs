@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     //int _currentHealth;
 
     TankController _tankController;
+    [SerializeField] Collider _playerCollider;
 
     //public int theScore;
     //[SerializeField] Text _scoreText;
@@ -39,6 +40,20 @@ public class Player : MonoBehaviour
             Instantiate(projectile, firePosition.position, firePosition.rotation);
             Feedback();
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        IDamageable damage = _playerCollider.GetComponent<IDamageable>();
+        if (damage != null)
+        {
+
+            damage.TakeDamage(1);
+
+            
+        }
+
     }
 
     private void Feedback()

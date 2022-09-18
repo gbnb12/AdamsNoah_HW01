@@ -77,11 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ab87bcc620e3b4c9a06b69bc99e7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bossCollider: {fileID: 1080252438166287096, guid: d5a50d49a241ed241ade67158cff5c4e, type: 3}
+  _bossCollider: {fileID: 0}
   Speed: 0.25
   RB: {fileID: 1249063127859415976}
   _impactSound: {fileID: 8300000, guid: 95890a78d16c2244bac14303c0dc42ea, type: 3}
-  _impactParticle: {fileID: 7515105660469916361, guid: 83ca209bfb6fb8b47a061545a8c9c7d5, type: 3}
+  _impactParticle: {fileID: 5405426162574187185, guid: 870948ef8f785d849a10c321dc792875, type: 3}
 --- !u!1 &1249063128016062207
 GameObject:
   m_ObjectHideFlags: 0
