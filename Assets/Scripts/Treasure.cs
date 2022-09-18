@@ -13,7 +13,7 @@ public class Treasure : CollectibleBase
     protected override void Collect(Player player)
     {
 
-        player.Score();
+        //player.Score();
 
     }
 

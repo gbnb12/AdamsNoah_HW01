@@ -3,48 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Inheritance
+
+public class Health : MonoBehaviour, IDamageable
 {
 
-    [RequireComponent(typeof(Rigidbody))]
+    private int  _currentHealth = 3;
 
-    public class Health : MonoBehaviour
+    void Start()
     {
+        _currentHealth = 3;
+    }
 
+    public void Kill()
+    {
+        Destroy(gameObject);
+    }
 
-        [SerializeField] int _maxHealth = 3;
-        int _currentHealth;
-        [SerializeField] Text _healthText;
-
-        private void Start()
+    public void TakeDamage(int amount)
+    {
+        _currentHealth -= amount;
+        if(_currentHealth <= 0)
         {
-            _currentHealth = _maxHealth;
-        }
-
-        public void IncreaseHealth(int amount)
-        {
-            _currentHealth += amount;
-            _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-            Debug.Log("Player's health: " + _currentHealth);
-            _healthText.GetComponent<Text>().text = "Health: " + _currentHealth;
-        }
-
-        public void DecreaseHealth(int amount)
-        {
-            _currentHealth -= amount;
-            Debug.Log("Player's health: " + _currentHealth);
-            _healthText.GetComponent<Text>().text = "Health: " + _currentHealth;
-            if (_currentHealth <= 0)
-            {
-                Kill();
-            }
-        }
-
-        public void Kill()
-        {
-            gameObject.SetActive(false);
-
+            Kill();
         }
     }
 
 }
+
