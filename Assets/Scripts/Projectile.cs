@@ -16,6 +16,7 @@ namespace Inheritance
         [Header("Settings")]
         [SerializeField] protected float Speed = .25f;
         [SerializeField] protected Rigidbody RB;
+        [SerializeField] protected float increaseSpeed = .50f;
 
         [Header("Effects")]
         [SerializeField] protected AudioClip _impactSound;
@@ -47,6 +48,11 @@ namespace Inheritance
         {
             Vector3 moveOffset = transform.forward * Speed;
             RB.MovePosition(RB.position + moveOffset);
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                 Speed += increaseSpeed;
+                
+            }
         }
 
         private void Feedback()

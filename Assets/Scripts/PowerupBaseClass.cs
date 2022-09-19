@@ -50,34 +50,19 @@ public abstract class PowerupBaseClass : MonoBehaviour
     {
         _poweredUp = true;
 
-        ActivatePowerup(player);
+        //ActivatePowerup(player);
 
         
 
         yield return new WaitForSeconds(_powerupTime);
 
-        DeactivatePowerup(player);
+       //DeactivatePowerup(player);
         
 
         _poweredUp = false;
     }
 
-    void ActivatePowerup(Player player)
-    {
-        if (player != null)
-        {
-            
-
-
-
-        }
-    }
-
-    void DeactivatePowerup(Player player)
-    {
-        
-
-    }
+    
 
     protected virtual void Movement(Rigidbody rb)
     {
@@ -103,6 +88,8 @@ public abstract class PowerupBaseClass : MonoBehaviour
             AudioHelper.PlayClip2D(_collectSound, 1f);
         }
     }
+
+  
 
     
 }

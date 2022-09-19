@@ -5,12 +5,25 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof(TankController))]
+
+
 public class Player : MonoBehaviour
 {
+    [Header("Projectiles")]
     public GameObject projectile;
     public Transform firePosition;
+    [Header("Shoot Effects")]
     [SerializeField] protected AudioClip _shootSound;
     [SerializeField] protected ParticleSystem _shootParticle;
+    [Header("Hurt Effects")]
+    [SerializeField] protected AudioClip _hurtSound;
+    [SerializeField] protected ParticleSystem _hurtParticle;
+    [Header("Two Positions")]
+    public Transform firstPosition;
+    public Transform secondPosition;
+
+
+
 
     //public GameObject projectileInstance;
     //[SerializeField] int _maxHealth = 3;
@@ -23,15 +36,17 @@ public class Player : MonoBehaviour
     //[SerializeField] Text _scoreText;
     //[SerializeField] Text _healthText;
 
-    private void Awake()
-    {
-        _tankController = GetComponent<TankController>();
-    }
+        
 
-    //private void Start()
-    //{
+    private void Awake()
+        {
+            _tankController = GetComponent<TankController>();
+        }
+
+        //private void Start()
+        //{
         //_currentHealth = _maxHealth;
-    //}
+        //}
 
     void Update()
     {
@@ -40,32 +55,52 @@ public class Player : MonoBehaviour
             Instantiate(projectile, firePosition.position, firePosition.rotation);
             Feedback();
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        IDamageable damage = _playerCollider.GetComponent<IDamageable>();
-        if (damage != null)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-
-            damage.TakeDamage(1);
-
-            
+            Instantiate(projectile, firstPosition.position, firstPosition.rotation);
+            Instantiate(projectile, secondPosition.position, secondPosition.rotation);
+            Feedback();
         }
 
     }
 
-    private void Feedback()
+     private void OnCollisionEnter(Collision collision)
+     {
+        
+            IDamageable damage = _playerCollider.GetComponent<IDamageable>();
+            if (damage != null)
+            {
+                damage.TakeDamage(1);
+                DamageFeedback();
+               
+            }
+        
+     }
+
+        private void Feedback()
+        {
+            if (_shootSound != null)
+            {
+                AudioHelper.PlayClip2D(_shootSound, 1f);
+
+            }
+            if (_shootParticle != null)
+            {
+                _shootParticle = Instantiate(_shootParticle,
+                    transform.position, Quaternion.identity);
+            }
+        }
+
+        private void DamageFeedback()
     {
         if (_shootSound != null)
         {
-            AudioHelper.PlayClip2D(_shootSound, 1f);
+            AudioHelper.PlayClip2D(_hurtSound, 1f);
 
         }
         if (_shootParticle != null)
         {
-            _shootParticle = Instantiate(_shootParticle,
+            _shootParticle = Instantiate(_hurtParticle,
                 transform.position, Quaternion.identity);
         }
     }

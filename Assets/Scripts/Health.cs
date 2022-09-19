@@ -8,6 +8,7 @@ public class Health : MonoBehaviour, IDamageable
 {
 
     private int  _currentHealth = 3;
+    
     [SerializeField] Text _healthText;
 
     [Header("Effects")]
@@ -27,7 +28,8 @@ public class Health : MonoBehaviour, IDamageable
     public void TakeDamage(int amount)
     {
         _currentHealth -= amount;
-        _healthText.GetComponent<Text>().text = "Boss Health: " + _currentHealth;
+        
+        _healthText.GetComponent<Text>().text = "Health: " + _currentHealth;
         if (_currentHealth <= 0)
         {
             Kill();
