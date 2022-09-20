@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour, IDamageable
 {
 
-    private int  _currentHealth = 3;
+    private int  _currentHealth = 4;
     
     [SerializeField] Text _healthText;
 
@@ -17,7 +17,7 @@ public class Health : MonoBehaviour, IDamageable
 
     void Start()
     {
-        _currentHealth = 3;
+        _currentHealth = 4;
     }
 
     public void Kill()
