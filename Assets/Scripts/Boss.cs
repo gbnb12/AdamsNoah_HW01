@@ -8,46 +8,73 @@ public class Boss : MonoBehaviour
 {
 
     [SerializeField] Collider _bossCollider;
+    [SerializeField] float ObjectSpeed;
 
-    public float speed;
-    private float waitTime;
-    public float startWaitTime;
+    //public float speed;
+    //private float waitTime;
+    //public float startWaitTime;
 
-    public Transform[] moveSpots;
-    private int randomSpot;
+    //public Transform[] moveSpots;
+    //private int randomSpot;
 
-   
+    [SerializeField] Transform[] Positions;
+    Transform NextPos;
+    int NextPosIndex;
 
     void Start()
     {
-        waitTime = startWaitTime;
-        randomSpot = Random.Range(0, moveSpots.Length);
+        NextPos = Positions[0];
+        //waitTime = startWaitTime;
+        //randomSpot = Random.Range(0, moveSpots.Length);
     }
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
+        MoveGameObject();
+
+        //transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
+
+        //if(Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
+        //{
+            //if(waitTime <= 0)
+            //{
+                //randomSpot = Random.Range(0, moveSpots.Length);
+                //waitTime = startWaitTime;
+            //}
+            //else
+            //{
+                //waitTime -= Time.deltaTime;
+            //}
+        //}
+    }
+
+    void MoveGameObject()
+    {
+        if(transform.position == NextPos.position)
         {
-            if(waitTime <= 0)
+            NextPosIndex++;
+            if(NextPosIndex >= Positions.Length)
             {
-                randomSpot = Random.Range(0, moveSpots.Length);
-                waitTime = startWaitTime;
+                NextPosIndex = 0;
             }
-            else
-            {
-                waitTime -= Time.deltaTime;
-            }
+            NextPos = Positions[NextPosIndex];
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, NextPos.position, ObjectSpeed * Time.deltaTime);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.name == "PlayerProjectile(Clone)") 
+        {
             IDamageable damage = _bossCollider.GetComponent<IDamageable>();
             if (damage != null)
             {
-                damage.TakeDamage(1);   
-            }     
+                damage.TakeDamage(1);
+            }
+        }
     }
 }

@@ -64,17 +64,18 @@ public class Player : MonoBehaviour
 
     }
 
-     private void OnCollisionEnter(Collision collision)
+     private void OnCollisionEnter(Collision other)
      {
-        
+        if (other.gameObject.name == "Boss")
+        {
             IDamageable damage = _playerCollider.GetComponent<IDamageable>();
             if (damage != null)
             {
                 damage.TakeDamage(1);
                 DamageFeedback();
-               
+
             }
-        
+        }
      }
 
         private void Feedback()
