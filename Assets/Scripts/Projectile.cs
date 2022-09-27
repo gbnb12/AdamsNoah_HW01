@@ -10,9 +10,6 @@ namespace Inheritance
     {
         protected abstract void Impact(Collision otherCollision);
 
-       
-        
-
         [Header("Settings")]
         [SerializeField] protected float Speed = .25f;
         [SerializeField] protected Rigidbody RB;

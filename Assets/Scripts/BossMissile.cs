@@ -5,14 +5,11 @@ using Inheritance;
 
 namespace indexer
 {
-    public class PlayerMissile : Projectile
+    public class BossMissile : Projectile
     {
         protected override void Impact(Collision otherCollision)
         {
-           
-                //otherCollision.rigidbody.gameObject.SetActive(false);
-                gameObject.SetActive(false);
-            
+            gameObject.SetActive(false);
         }
     }
 }

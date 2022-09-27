@@ -6,18 +6,20 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IDamageable
 {
-
+    public int _healthAmount = 1;
     private int  _currentHealth = 3;
     
     [SerializeField] Text _healthText;
-
+    
     [Header("Effects")]
     [SerializeField] protected AudioClip _killSound;
     [SerializeField] protected ParticleSystem _killParticle;
 
+    public Slider healthSlider;
+
     void Start()
     {
-        _currentHealth = 3;
+        _currentHealth = _healthAmount;
     }
 
     public void Kill()
@@ -30,6 +32,7 @@ public class Health : MonoBehaviour, IDamageable
         _currentHealth -= amount;
         
         _healthText.GetComponent<Text>().text = "Health: " + _currentHealth;
+        UpdateSlider();
         if (_currentHealth <= 0)
         {
             Kill();
@@ -50,5 +53,10 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
+    public void UpdateSlider()
+    {
+        healthSlider.value = _currentHealth;
+        
+    }
 }
 

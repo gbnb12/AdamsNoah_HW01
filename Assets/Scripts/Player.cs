@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     public Transform firstPosition;
     public Transform secondPosition;
 
-
+    public CameraShake cameraShake;
 
 
     //public GameObject projectileInstance;
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
             {
                 damage.TakeDamage(1);
                 DamageFeedback();
-
+                StartCoroutine(cameraShake.Shake(.5f, -1f));
             }
         }
      }
