@@ -36,7 +36,9 @@ public class Player : MonoBehaviour
     //[SerializeField] Text _scoreText;
     //[SerializeField] Text _healthText;
 
-        
+    [SerializeField] private float attackCooldown;
+    private float cooldownTimer = Mathf.Infinity;
+
 
     private void Awake()
         {
@@ -50,10 +52,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && cooldownTimer > attackCooldown)
         {
             Instantiate(projectile, firePosition.position, firePosition.rotation);
             Feedback();
+            cooldownTimer = 0;
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -61,6 +64,11 @@ public class Player : MonoBehaviour
             Instantiate(projectile, secondPosition.position, secondPosition.rotation);
             Feedback();
         }
+
+       
+      
+            cooldownTimer += Time.deltaTime;
+        
 
     }
 
@@ -76,7 +84,15 @@ public class Player : MonoBehaviour
                 StartCoroutine(cameraShake.Shake(.5f, -1f));
             }
         }
-     }
+        if (other.gameObject.name == "BossProjectile(Clone)")
+        {
+            IDamageable damage = _playerCollider.GetComponent<IDamageable>();
+            if (damage != null)
+            {
+                damage.TakeDamage(1);
+            }
+        }
+    }
 
         private void Feedback()
         {
