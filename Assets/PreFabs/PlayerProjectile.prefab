@@ -77,8 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ab87bcc620e3b4c9a06b69bc99e7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.25
+  Speed: 0.3
   RB: {fileID: 1249063127859415976}
+  increaseSpeed: 0.5
   _impactSound: {fileID: 8300000, guid: 95890a78d16c2244bac14303c0dc42ea, type: 3}
   _impactParticle: {fileID: 5405426162574187185, guid: 0c86e861cf6ffdb4bb30df550074250c, type: 3}
 --- !u!1 &1249063128016062207

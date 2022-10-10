@@ -27,13 +27,14 @@ public class Boss : MonoBehaviour
     [SerializeField] protected AudioClip _shootSound;
     [SerializeField] protected ParticleSystem _shootParticle;
 
-
     Transform NextPos;
     int NextPosIndex;
 
     public GameObject chargeEffect;
 
-    
+    public GameObject minePrefab;
+
+    [SerializeField] protected AudioClip _mineSpawnSound;
 
     void Start()
     {
@@ -60,6 +61,9 @@ public class Boss : MonoBehaviour
             {
                 Instantiate(projectile, firePosition.position, firePosition.rotation);
                 Feedback();
+
+                
+
             }
             if (NextPosIndex == 2)
             {
@@ -75,6 +79,9 @@ public class Boss : MonoBehaviour
             {
                 Instantiate(projectile, firePosition.position, firePosition.rotation);
                 Feedback();
+                Vector3 randomSpawnPosition = new Vector3(Random.Range(-17, -2), 1, Random.Range(-10, -2));
+                Instantiate(minePrefab, randomSpawnPosition, Quaternion.identity);
+                MineEffect();
             }
             if (NextPosIndex == 5)
             {
@@ -101,6 +108,10 @@ public class Boss : MonoBehaviour
                 Feedback();
 
                 chargeEffect.SetActive(true);
+
+                Vector3 randomSpawnPosition = new Vector3(Random.Range(2, 17), 1, Random.Range(-10, -9));
+                Instantiate(minePrefab, randomSpawnPosition, Quaternion.identity);
+                MineEffect();
 
             }
             if (NextPosIndex == 10)
@@ -164,7 +175,13 @@ public class Boss : MonoBehaviour
 
     }
 
-    
+    private void MineEffect()
+    {
+        if (_mineSpawnSound != null)
+        {
+            AudioHelper.PlayClip2D(_mineSpawnSound, 1f);
+        }
+    }
 
     
 }

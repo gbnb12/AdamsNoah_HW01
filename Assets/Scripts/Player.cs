@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (other.gameObject.name == "BossMine")
+        if (other.gameObject.name == "BossMine(Clone)")
         {
             IDamageable damage = _playerCollider.GetComponent<IDamageable>();
             if (damage != null)
