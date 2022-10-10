@@ -79,7 +79,7 @@ public class Boss : MonoBehaviour
             {
                 Instantiate(projectile, firePosition.position, firePosition.rotation);
                 Feedback();
-                Vector3 randomSpawnPosition = new Vector3(Random.Range(-17, -2), 1, Random.Range(-10, -2));
+                Vector3 randomSpawnPosition = new Vector3(Random.Range(-8, -2), 1, Random.Range(-10, -2));
                 Instantiate(minePrefab, randomSpawnPosition, Quaternion.identity);
                 MineEffect();
             }

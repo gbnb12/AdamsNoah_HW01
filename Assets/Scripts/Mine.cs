@@ -10,10 +10,18 @@ public class Mine : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        
-        
-        Destroy(gameObject);
-        Feedback();
+
+        if (other.gameObject.name == "Tank")
+        {
+            Destroy(gameObject);
+            Feedback();
+        }
+        if (other.gameObject.name == "Boss")
+        {
+            Destroy(gameObject);
+            Feedback();
+        }
+
     }
 
     private void Feedback()
