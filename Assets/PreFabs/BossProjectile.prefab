@@ -81,7 +81,7 @@ MonoBehaviour:
   RB: {fileID: 2799259858509637671}
   increaseSpeed: 0
   _impactSound: {fileID: 8300000, guid: 95890a78d16c2244bac14303c0dc42ea, type: 3}
-  _impactParticle: {fileID: 0}
+  _impactParticle: {fileID: 5405426162574187185, guid: 3a3b5df5a655fff4dbae2d2c1befd927, type: 3}
 --- !u!1 &2799259858539680538
 GameObject:
   m_ObjectHideFlags: 0

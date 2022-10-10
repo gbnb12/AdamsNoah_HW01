@@ -17,13 +17,14 @@ public class Player : MonoBehaviour
     [SerializeField] protected ParticleSystem _shootParticle;
     [Header("Hurt Effects")]
     [SerializeField] protected AudioClip _hurtSound;
-    [SerializeField] protected ParticleSystem _hurtParticle;
+    
     [Header("Two Positions")]
     public Transform firstPosition;
     public Transform secondPosition;
 
     public CameraShake cameraShake;
 
+    public GameObject damageEffect;
 
     //public GameObject projectileInstance;
     //[SerializeField] int _maxHealth = 3;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float attackCooldown;
     private float cooldownTimer = Mathf.Infinity;
 
+    float flashTime = .15f;
 
     private void Awake()
         {
@@ -58,12 +60,14 @@ public class Player : MonoBehaviour
             Feedback();
             cooldownTimer = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Instantiate(projectile, firstPosition.position, firstPosition.rotation);
-            Instantiate(projectile, secondPosition.position, secondPosition.rotation);
-            Feedback();
-        }
+
+        //if (Input.GetKeyDown(KeyCode.Q) && cooldownTimer > attackCooldown)
+        //{
+            //Instantiate(projectile, firstPosition.position, firstPosition.rotation);
+            //Instantiate(projectile, secondPosition.position, secondPosition.rotation);
+            //Feedback();
+            //cooldownTimer = 0;
+        //}
 
        
       
@@ -82,14 +86,31 @@ public class Player : MonoBehaviour
                 damage.TakeDamage(1);
                 DamageFeedback();
                 StartCoroutine(cameraShake.Shake(.5f, -1f));
+                StartCoroutine(EFlash());
             }
         }
+
         if (other.gameObject.name == "BossProjectile(Clone)")
         {
             IDamageable damage = _playerCollider.GetComponent<IDamageable>();
             if (damage != null)
             {
                 damage.TakeDamage(1);
+                DamageFeedback();
+                StartCoroutine(cameraShake.Shake(.5f, -1f));
+                StartCoroutine(EFlash());
+            }
+        }
+
+        if (other.gameObject.name == "BossMine")
+        {
+            IDamageable damage = _playerCollider.GetComponent<IDamageable>();
+            if (damage != null)
+            {
+                damage.TakeDamage(1);
+                DamageFeedback();
+                StartCoroutine(cameraShake.Shake(.5f, -1f));
+                StartCoroutine(EFlash());
             }
         }
     }
@@ -110,16 +131,30 @@ public class Player : MonoBehaviour
 
         private void DamageFeedback()
     {
-        if (_shootSound != null)
+        if (_hurtSound != null)
         {
             AudioHelper.PlayClip2D(_hurtSound, 1f);
 
         }
-        if (_shootParticle != null)
-        {
-            _shootParticle = Instantiate(_hurtParticle,
-                transform.position, Quaternion.identity);
-        }
+    }
+
+    void FlashStart()
+    {
+        damageEffect.SetActive(true);
+        Invoke("FlashEnd", flashTime);
+    }
+
+    void FlashEnd()
+    {
+        damageEffect.SetActive(false);
+
+    }
+
+    IEnumerator EFlash()
+    {
+        damageEffect.SetActive(true);
+        yield return new WaitForSeconds(flashTime);
+        damageEffect.SetActive(false);
     }
 
     //public void IncreaseHealth(int amount)

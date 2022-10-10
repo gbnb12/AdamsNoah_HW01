@@ -128,6 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8304638449945820110}
   - component: {fileID: 2290723131898448355}
+  - component: {fileID: 1272943879}
   m_Layer: 0
   m_Name: BossMine
   m_TagString: Untagged
@@ -161,10 +162,22 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8862855
-  m_Height: 1.772571
+  m_Radius: 1.3714411
+  m_Height: 2.7428823
   m_Direction: 1
-  m_Center: {x: -0.0040156245, y: 0, z: 0.0042351484}
+  m_Center: {x: -0.004015684, y: 0, z: 0.04754138}
+--- !u!114 &1272943879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8304638449945820111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b4894a6b403f946833a451381c2a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8304638450134950698
 GameObject:
   m_ObjectHideFlags: 0
