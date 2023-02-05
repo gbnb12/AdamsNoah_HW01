@@ -38,6 +38,7 @@ public abstract class EnemyBase : MonoBehaviour
             _health -= 1;
             AudioHelper.PlayClip2D(_hitSound, 1, .1f);
             OnHit();
+            
             if (_health <= 0)
             {
                 Kill();

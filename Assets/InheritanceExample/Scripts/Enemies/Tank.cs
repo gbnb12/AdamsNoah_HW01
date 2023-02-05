@@ -5,38 +5,40 @@ using UnityEngine;
 public class Tank : EnemyBase
 {
     public float StopTime { get; set; } = 1f;
-    public float End = 2;
+
+    public bool IsHit { get; private set; } = true;
+
     private float _elapsedTime = 0;
 
     protected override void OnHit()
     {
-        
+        MoveSpeed = 0f;
         StartTime();
-        MoveSpeed *= 0f;
-        TimeLimit();
+        TimeWatch();
         
-        _elapsedTime += Time.deltaTime;
-        if (_elapsedTime >= End)
+    }
+
+    private void Coutdown()
+    {
+        //_elapsedTime += Time.deltaTime;
+        if (_elapsedTime >= StopTime)
         {
-            MoveSpeed *= 5f;
+            MoveSpeed = 0.10f;
         }
-
-       
-        //if (_elapsedTime <= StopTime)
-        //{
-
-        //Debug.Log("Slow Speed");
-        //}
-        //else if (_elapsedTime >= End)
-        //{
-        //MoveSpeed *= 5f;
-        //Debug.Log("Noraml Speed");
-        //}
     }
 
     private void TrackCooldown()
     {
-        _elapsedTime += Time.deltaTime;
+        if (IsHit == true)
+        {
+            //MoveSpeed *= 0f;
+            //_elapsedTime += Time.deltaTime;
+            if (_elapsedTime >= StopTime)
+            {
+                IsHit = false;
+                MoveSpeed *= 0.05f;
+            }
+        }
     }
 
     private void StartTime()
@@ -44,27 +46,18 @@ public class Tank : EnemyBase
         _elapsedTime = 0;
     }
 
-    //private void Update()
-    //{
-        //_elapsedTime += Time.deltaTime;
-        //Debug.Log(_elapsedTime);
-    //}
-
-    private void TimeLimit()
+    private void TimeWatch()
     {
         _elapsedTime += Time.deltaTime;
-        if (_elapsedTime >= End)
+        if (_elapsedTime >= StopTime)
         {
-            MoveSpeed *= 5f;
+            MoveSpeed = 0.05f;
         }
     }
 
     private void Update()
     {
-        _elapsedTime += Time.deltaTime;
-        if (_elapsedTime >= End)
-        {
-            MoveSpeed *= 0.05f;
-        }
+        Debug.Log(_elapsedTime);
+        TimeWatch();
     }
 }

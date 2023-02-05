@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RapidFire : PowerUpBase
 {
+    public TurretController FireCooldown;
     protected override void OnHit()
     {
         FindObjectOfType<TurretController>();
@@ -12,12 +13,13 @@ public class RapidFire : PowerUpBase
 
     protected override void PowerUp()
     {
-        //TurretController FireCooldown = 0.25f;
-        Debug.Log("Start");
+        //FireCooldown = 0.25f;
+       
+        //Debug.Log("Start");
     }
 
     protected override void PowerDown()
     {
-        Debug.Log("Finish");
+        //Debug.Log("Finish");
     }
 }
