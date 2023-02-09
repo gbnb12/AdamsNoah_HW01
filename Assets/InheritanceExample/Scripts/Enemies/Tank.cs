@@ -6,39 +6,13 @@ public class Tank : EnemyBase
 {
     public float StopTime { get; set; } = 1f;
 
-    public bool IsHit { get; private set; } = true;
-
     private float _elapsedTime = 0;
 
     protected override void OnHit()
     {
         MoveSpeed = 0f;
         StartTime();
-        TimeWatch();
-        
-    }
-
-    private void Coutdown()
-    {
-        //_elapsedTime += Time.deltaTime;
-        if (_elapsedTime >= StopTime)
-        {
-            MoveSpeed = 0.10f;
-        }
-    }
-
-    private void TrackCooldown()
-    {
-        if (IsHit == true)
-        {
-            //MoveSpeed *= 0f;
-            //_elapsedTime += Time.deltaTime;
-            if (_elapsedTime >= StopTime)
-            {
-                IsHit = false;
-                MoveSpeed *= 0.05f;
-            }
-        }
+        TimeWatch(); 
     }
 
     private void StartTime()
@@ -57,7 +31,7 @@ public class Tank : EnemyBase
 
     private void Update()
     {
-        Debug.Log(_elapsedTime);
+        //Debug.Log(_elapsedTime);
         TimeWatch();
     }
 }

@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class RapidFire : PowerUpBase
 {
-    public TurretController FireCooldown;
+    //public TurretController FireCooldown;
+
     protected override void OnHit()
     {
-        FindObjectOfType<TurretController>();
-        
+        //FindObjectOfType<TurretController>(); 
     }
 
     protected override void PowerUp()
     {
-        //FireCooldown = 0.25f;
-       
+        //GetComponent<TurretController>().FireCooldown = 0.25f;
+        FindObjectOfType<TurretController>().FireCooldown = 0.25f;
         //Debug.Log("Start");
     }
 
     protected override void PowerDown()
     {
+        //GetComponent<TurretController>().FireCooldown = 0.5f;
+        FindObjectOfType<TurretController>().FireCooldown = 0.5f;
         //Debug.Log("Finish");
     }
 }
